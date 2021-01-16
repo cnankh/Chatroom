@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import com.example.chatroom.R
 import com.example.chatroom.databinding.FragmentLoginBinding
 import com.example.chatroom.viewmodel.LoginController
 import com.example.chatroom.viewmodel.LoginViewModel
@@ -40,14 +42,14 @@ class LoginFragment : Fragment(), LoginController {
     private fun isInputValid(): Boolean {
 
         if (binding.usernameEt.text.isNullOrBlank()) {
-            binding.usernameLayout.error = "لطفا نام کاربری را وارد کتیذ"
+            binding.usernameLayout.error = this.resources.getString(R.string.enter_username)
             return false
         } else {
             binding.usernameLayout.error = null
         }
 
         if (binding.passwordEt.text.isNullOrBlank()) {
-            binding.passwordLayout.error = "لطفا پسوورد را وارد کتیذ"
+            binding.passwordLayout.error = this.resources.getString(R.string.enter_password)
             return false
         } else {
             binding.usernameLayout.error = null
@@ -74,5 +76,10 @@ class LoginFragment : Fragment(), LoginController {
             viewModel.login(view)
         }
 
+    }
+
+    override fun onSignUpClicked(view: View) {
+        val action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
+        Navigation.findNavController(view).navigate(action)
     }
 }

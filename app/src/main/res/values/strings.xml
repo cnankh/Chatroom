@@ -9,4 +9,6 @@
     <string name="welcome">خوش آمدید</string>
     <string name="sign_up">ثبت نام</string>
     <string name="email">ایمیل</string>
+    <string name="enter_username">لطفا نام کاربری را وارد کتید</string>
+    <string name="enter_password">لطفا پسوورد را وارد کتید</string>
 </resources>
