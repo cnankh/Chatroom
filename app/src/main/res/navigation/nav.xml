@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/chatFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -15,8 +15,10 @@
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:exitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_loginFragment_to_roomFragment"
+            app:destination="@id/room_destination"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -24,15 +26,38 @@
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/room_destination"
         android:name="com.example.chatroom.view.fragments.navbar.RoomFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_room" />
+        tools:layout="@layout/fragment_room" >
+        <action
+            android:id="@+id/action_homeFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.chatroom.view.fragments.ChatFragment"
-        android:label="ChatFragment" />
+        android:label="ChatFragment" >
+        <action
+            android:id="@+id/action_chatFragment_to_room_destination"
+            app:destination="@id/room_destination"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/setting_destination"
+        android:name="com.example.chatroom.view.fragments.navbar.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_setting_destination_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

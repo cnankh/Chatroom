@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,8 +48,9 @@ class RoomFragment : Fragment() {
     }
 
     private fun initialConfiguration() {
-        mLayoutManager = LinearLayoutManager(context)
+        BottomNavController.setVisibility(activity!!, true)
 
+        mLayoutManager = LinearLayoutManager(context)
         binding.roomsRv.apply {
             adapter = mAdapter
             layoutManager = mLayoutManager

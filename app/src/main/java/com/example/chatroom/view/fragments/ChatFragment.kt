@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.chatroom.R
 import com.example.chatroom.databinding.FragmentChatBinding
 import com.example.chatroom.view.adapters.MessageAdapter
-import com.example.chatroom.view.adapters.RoomAdapter
+import com.example.chatroom.view.fragments.navbar.BottomNavController
+import com.example.chatroom.controller.ChatController
 import com.example.chatroom.viewmodel.MessageViewModel
-import com.example.chatroom.viewmodel.RoomViewModel
 
-class ChatFragment : Fragment() {
+class ChatFragment : Fragment(), ChatController {
 
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
@@ -49,7 +49,12 @@ class ChatFragment : Fragment() {
     }
 
     private fun initialConfiguration() {
+        BottomNavController.setVisibility(activity!!, false)
         mLayoutManager = LinearLayoutManager(context)
+
+        binding.apply {
+            this.controller = this@ChatFragment
+        }
 
         binding.messageRv.apply {
             adapter = mAdapter
@@ -63,6 +68,15 @@ class ChatFragment : Fragment() {
         viewModel.messages.observe(this, Observer {
             mAdapter.updateList(it)
         })
+    }
+
+    override fun onBackClicked(view: View) {
+        val action = ChatFragmentDirections.actionChatFragmentToRoomDestination()
+        Navigation.findNavController(view).navigate(action)
+    }
+
+    override fun onSendClicked(view: View) {
+
     }
 
 }

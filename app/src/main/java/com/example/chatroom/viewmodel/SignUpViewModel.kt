@@ -33,7 +33,7 @@ class SignUpViewModel(application: Application) : BaseViewModel(application) {
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
-    fun onSignUpClicked(view: View) {
+    fun signUp(view: View) {
         this.view = view as Button
         user.value = User(
             username.value.toString(),
@@ -51,6 +51,7 @@ class SignUpViewModel(application: Application) : BaseViewModel(application) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<Response<User>>() {
                     override fun onSuccess(response: Response<User>) {
+                        loading.value = false
                         if (response.isSuccessful) {
                             navigateToLogin()
                             Toast.makeText(
@@ -64,6 +65,7 @@ class SignUpViewModel(application: Application) : BaseViewModel(application) {
                     }
 
                     override fun onError(e: Throwable) {
+                        loading.value = false
                         Log.d(TAG, "error")
                     }
                 })

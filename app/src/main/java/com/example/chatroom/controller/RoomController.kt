@@ -1,4 +1,4 @@
-package com.example.chatroom.viewmodel
+package com.example.chatroom.controller
 
 import android.view.View
 

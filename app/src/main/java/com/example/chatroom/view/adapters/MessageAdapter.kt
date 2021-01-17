@@ -1,17 +1,12 @@
 package com.example.chatroom.view.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chatroom.R
 import com.example.chatroom.databinding.ItemMessageRecievedBinding
-import com.example.chatroom.databinding.ItemRoomBinding
 import com.example.chatroom.model.Message
-import com.example.chatroom.model.Room
-import com.example.chatroom.viewmodel.RoomController
 
 class MessageAdapter(val dataSet: ArrayList<Message>) :
     RecyclerView.Adapter<MessageAdapter.CustomViewHolder>() {

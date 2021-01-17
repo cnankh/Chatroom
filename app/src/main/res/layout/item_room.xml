@@ -5,7 +5,7 @@
 
         <variable
             name="controller"
-            type="com.example.chatroom.viewmodel.RoomController" />
+            type="com.example.chatroom.controller.RoomController" />
 
         <variable
             name="room"

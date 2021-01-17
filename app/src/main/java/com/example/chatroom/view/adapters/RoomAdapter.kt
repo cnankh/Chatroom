@@ -1,6 +1,5 @@
 package com.example.chatroom.view.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chatroom.R
 import com.example.chatroom.databinding.ItemRoomBinding
 import com.example.chatroom.model.Room
-import com.example.chatroom.viewmodel.RoomController
+import com.example.chatroom.view.fragments.navbar.RoomFragmentDirections
+import com.example.chatroom.controller.RoomController
 
 class RoomAdapter(val dataSet: ArrayList<Room>) :
     RecyclerView.Adapter<RoomAdapter.CustomViewHolder>(), RoomController {
@@ -46,7 +46,8 @@ class RoomAdapter(val dataSet: ArrayList<Room>) :
     override fun getItemCount() = dataSet.size
 
     override fun onRoomClicked(view: View) {
-        Log.d("room adapter", "clicked")
+        val action = RoomFragmentDirections.actionHomeFragmentToChatFragment()
+        Navigation.findNavController(view).navigate(action)
     }
 
 }

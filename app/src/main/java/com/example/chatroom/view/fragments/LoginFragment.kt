@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.chatroom.R
 import com.example.chatroom.databinding.FragmentLoginBinding
-import com.example.chatroom.viewmodel.LoginController
+import com.example.chatroom.view.fragments.navbar.BottomNavController
+import com.example.chatroom.controller.LoginController
 import com.example.chatroom.viewmodel.LoginViewModel
 
 
@@ -37,6 +39,16 @@ class LoginFragment : Fragment(), LoginController {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialConfiguration()
+        observer()
+    }
+
+    private fun observer() {
+        viewModel.loading.observe(this, Observer {
+            binding.loading.visibility = if (it) View.VISIBLE else View.GONE
+            if (!it) {
+                binding.loginBtn.visibility = View.VISIBLE
+            }
+        })
     }
 
     private fun isInputValid(): Boolean {
@@ -58,6 +70,7 @@ class LoginFragment : Fragment(), LoginController {
     }
 
     private fun initialConfiguration() {
+        BottomNavController.setVisibility(activity!!, false)
         binding.apply {
             lifecycleOwner = this@LoginFragment
             binding.login = viewModel
@@ -74,6 +87,7 @@ class LoginFragment : Fragment(), LoginController {
         Log.d("tag", "on login clicked")
         if (isInputValid()) {
             viewModel.login(view)
+            binding.loginBtn.visibility = View.GONE
         }
 
     }

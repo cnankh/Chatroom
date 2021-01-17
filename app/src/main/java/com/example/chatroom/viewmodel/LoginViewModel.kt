@@ -29,6 +29,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
+    val loading = MutableLiveData<Boolean>()
 
     fun login(view: View) {
         this.view = view as Button
@@ -36,12 +37,14 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     }
 
     private fun validation() {
+        loading.value = true
         disposable.add(
             service.login(username.value!!, password.value!!)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<Response<Token>>() {
                     override fun onSuccess(response: Response<Token>) {
+                        loading.value = false
                         if (response.isSuccessful) {
                             navigateToHome()
                             Log.d(TAG, response.body()?.token.toString())
@@ -51,6 +54,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                     }
 
                     override fun onError(e: Throwable) {
+                        loading.value = false
                         Log.d(TAG, "error")
                     }
                 })
@@ -58,7 +62,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     }
 
     private fun navigateToHome() {
-        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+        val action = LoginFragmentDirections.actionLoginFragmentToRoomFragment()
         Navigation.findNavController(view).navigate(action)
     }
 

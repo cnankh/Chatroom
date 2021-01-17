@@ -4,6 +4,10 @@
     <data>
 
         <variable
+            name="controller"
+            type="com.example.chatroom.controller.SignUpController" />
+
+        <variable
             name="signUp"
             type="com.example.chatroom.viewmodel.SignUpViewModel" />
     </data>
@@ -98,9 +102,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransansmobilemedium"
-                android:onClick="@{(view)->signUp.onSignUpClicked(view)}"
+                android:onClick="@{controller::onSignUpClicked}"
                 android:text="@string/sign_up"
                 app:layout_constraintTop_toBottomOf="@id/password_layout" />
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/sig_up_ll"
