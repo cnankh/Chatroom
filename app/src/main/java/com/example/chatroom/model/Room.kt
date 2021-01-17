@@ -1,4 +1,5 @@
 package com.example.chatroom.model
 
-class Room {
-}
+data class Room(
+    val name: String
+)

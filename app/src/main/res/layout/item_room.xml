@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="controller"
+            type="com.example.chatroom.viewmodel.RoomController" />
+
+        <variable
+            name="room"
+            type="com.example.chatroom.model.Room" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{controller::onRoomClicked}"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/room_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/_8mdp"
+            android:fontFamily="@font/iransansmobilebold"
+            android:text="@{room.name}"
+            android:textSize="@dimen/_20font_mdp" />
+
+    </LinearLayout>
+</layout>
